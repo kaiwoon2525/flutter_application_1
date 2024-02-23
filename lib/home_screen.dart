@@ -48,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Trending Movies test github',
+                'Trending Movies test github action',
                 style: GoogleFonts.aBeeZee(fontSize: 25),
               ),
               const SizedBox(height: 32),
