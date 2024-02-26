@@ -4,7 +4,6 @@ import 'package:flutter_application_1/colors.dart';
 import 'package:flutter_application_1/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/loginpage.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

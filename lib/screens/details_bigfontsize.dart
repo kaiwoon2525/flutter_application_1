@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/biggerfontsize.dart';
 import 'package:flutter_application_1/colors.dart';
 import 'package:flutter_application_1/constants.dart';
 import 'package:flutter_application_1/home_screen.dart';
@@ -9,8 +8,8 @@ import 'package:flutter_application_1/widgets/back_button.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 // ignore: must_be_immutable
-class DetailsScreen extends StatelessWidget {
-  DetailsScreen({super.key, required this.movie});
+class DetailsScreen_Big extends StatelessWidget {
+  DetailsScreen_Big({super.key, required this.movie});
   int currentIndex = 0;
 
   final Movie movie;
@@ -29,7 +28,7 @@ class DetailsScreen extends StatelessWidget {
             title: Text(
               movie.title,
               style: GoogleFonts.belleza(
-                  fontSize: 17, fontWeight: FontWeight.w600),
+                  fontSize: 27, fontWeight: FontWeight.w600),
             ),
             background: ClipRRect(
               borderRadius: const BorderRadius.only(
@@ -53,7 +52,7 @@ class DetailsScreen extends StatelessWidget {
                   Text(
                     'Overview',
                     style: GoogleFonts.belleza(
-                        fontSize: 27, fontWeight: FontWeight.w800),
+                        fontSize: 37, fontWeight: FontWeight.w800),
                   ),
                   const SizedBox(
                     height: 15,
@@ -61,7 +60,7 @@ class DetailsScreen extends StatelessWidget {
                   Text(
                     movie.overview,
                     style: GoogleFonts.belleza(
-                        fontSize: 18, fontWeight: FontWeight.w400),
+                        fontSize: 28, fontWeight: FontWeight.w400),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(
@@ -70,7 +69,7 @@ class DetailsScreen extends StatelessWidget {
                   SizedBox(
                     child: Row(
                       // One row end one row start
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Container(
                           padding: const EdgeInsets.all(8),
@@ -82,18 +81,26 @@ class DetailsScreen extends StatelessWidget {
                               Text(
                                 'Release date: ',
                                 style: GoogleFonts.belleza(
-                                    fontSize: 15, fontWeight: FontWeight.w400),
+                                    fontSize: 25, fontWeight: FontWeight.w400),
                                 textAlign: TextAlign.center,
                               ),
                               Text(
                                 movie.release_date,
                                 style: GoogleFonts.belleza(
-                                    fontSize: 18, fontWeight: FontWeight.w400),
+                                    fontSize: 28, fontWeight: FontWeight.w400),
                                 textAlign: TextAlign.center,
                               )
                             ],
                           ),
                         ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    child: Row(
+                      // One row end one row start
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
                         Container(
                           padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
@@ -103,7 +110,7 @@ class DetailsScreen extends StatelessWidget {
                             Text(
                               'Rate',
                               style: GoogleFonts.belleza(
-                                  fontSize: 15, fontWeight: FontWeight.w400),
+                                  fontSize: 25, fontWeight: FontWeight.w400),
                               textAlign: TextAlign.center,
                             ),
                             const Icon(
@@ -113,7 +120,7 @@ class DetailsScreen extends StatelessWidget {
                             Text(
                               '${movie.vote_average.toStringAsFixed(1)}/10',
                               style: GoogleFonts.belleza(
-                                  fontSize: 15, fontWeight: FontWeight.w400),
+                                  fontSize: 25, fontWeight: FontWeight.w400),
                             ),
                           ]),
                         )
@@ -152,9 +159,7 @@ class DetailsScreen extends StatelessWidget {
                 context, MaterialPageRoute(builder: (context) => MapScreen()));
           } else if (index == 2) {
             Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => HomeScreen_Biggerfontsize()));
+                context, MaterialPageRoute(builder: (context) => HomeScreen()));
           }
         },
       ),

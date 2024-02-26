@@ -34,6 +34,7 @@ class _LoginPageState extends State<LoginPage> {
         // Initiate OAuth flow here to obtain access tokens
         // Example: You might use FirebaseAuth for OAuth authentication
         // Replace this with your actual OAuth authentication method
+        // ignore: unused_local_variable
         UserCredential userCredential = await FirebaseAuth.instance
             .signInWithEmailAndPassword(email: email, password: password);
 
@@ -41,12 +42,14 @@ class _LoginPageState extends State<LoginPage> {
         await storeLoggedInState(true);
 
         // Navigate to home screen upon successful login
+        // ignore: use_build_context_synchronously
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => HomeScreen()),
+          MaterialPageRoute(builder: (context) => const HomeScreen()),
         );
       } on FirebaseAuthException catch (ex) {
         // Handle authentication errors
+        // ignore: use_build_context_synchronously
         return UiHelper.customAlerBox(context, ex.code.toString());
       }
     }
@@ -70,21 +73,23 @@ class _LoginPageState extends State<LoginPage> {
             login(emailController.text.toString(),
                 passwordController.text.toString());
           }, 'Login'),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Row(
             children: [
-              Text(
+              const Text(
                 'Already Have an Account??',
                 style: TextStyle(fontSize: 16),
               ),
               TextButton(
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => SignUpPage()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const SignUpPage()));
                 },
-                child: Text('Sign Up'),
+                child: const Text('Sign Up'),
                 //style: TextStyle(fontSize: 20,fontWeight: FontWeight.w500,),
               )
             ],
@@ -94,17 +99,17 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  @override
-  void initState() {
-    super.initState();
-    checkLoggedInState();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   checkLoggedInState();
+  // }
 
-  void checkLoggedInState() async {
-    bool isLoggedIn = await getLoggedInState();
-    if (isLoggedIn) {
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => HomeScreen()));
-    }
-  }
+  // void checkLoggedInState() async {
+  //   bool isLoggedIn = await getLoggedInState();
+  //   if (isLoggedIn) {
+  //     Navigator.pushReplacement(
+  //         context, MaterialPageRoute(builder: (context) => HomeScreen()));
+  //   }
+  // }
 }

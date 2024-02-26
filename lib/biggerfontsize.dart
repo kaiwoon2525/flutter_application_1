@@ -1,25 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/api/api.dart';
-import 'package:flutter_application_1/biggerfontsize.dart';
+import 'package:flutter_application_1/home_screen.dart';
+
 import 'package:flutter_application_1/map.dart';
+import 'package:flutter_application_1/widgets/movie_silder_fontsize.dart';
+import 'package:flutter_application_1/widgets/trending_bigfontsize.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'models/movie.dart';
-import 'widgets/movie_silder.dart';
-import 'widgets/trending_silder.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class HomeScreen_Biggerfontsize extends StatefulWidget {
+  const HomeScreen_Biggerfontsize({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<HomeScreen_Biggerfontsize> createState() => _HomeScreenState();
 }
 
 late Future<List<Movie>> trandingMovies;
 late Future<List<Movie>> ToprateMovies;
 late Future<List<Movie>> upcomingMovies;
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen_Biggerfontsize> {
   int currentIndex = 0;
   @override
   void initState() {
@@ -53,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               Text(
                 'Trending Movies github',
-                style: GoogleFonts.aBeeZee(fontSize: 25),
+                style: GoogleFonts.aBeeZee(fontSize: 35),
               ),
               const SizedBox(height: 32),
               SizedBox(
@@ -66,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       );
                     } else if (snapshot.hasData) {
                       // final data = snapshot.data;
-                      return TrendingSider(
+                      return TrendingSider_fontSize(
                         snapshot: snapshot,
                       );
                     } else {
@@ -78,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 32),
               Text(
                 'Top rated movies',
-                style: GoogleFonts.aBeeZee(fontSize: 25),
+                style: GoogleFonts.aBeeZee(fontSize: 35),
               ),
               const SizedBox(height: 32),
               SizedBox(
@@ -91,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       );
                     } else if (snapshot.hasData) {
                       // final data = snapshot.data;
-                      return MovieSilder(
+                      return MovieSilder_BigfontSize(
                         snapshot: snapshot,
                       );
                     } else {
@@ -103,7 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 32),
               Text(
                 'Upcoming Movies',
-                style: GoogleFonts.aBeeZee(fontSize: 25),
+                style: GoogleFonts.aBeeZee(fontSize: 35),
               ),
               const SizedBox(height: 32),
               SizedBox(
@@ -116,7 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       );
                     } else if (snapshot.hasData) {
                       // final data = snapshot.data;
-                      return MovieSilder(
+                      return MovieSilder_BigfontSize(
                         snapshot: snapshot,
                       );
                     } else {
@@ -150,16 +151,14 @@ class _HomeScreenState extends State<HomeScreen> {
           // Handle navigation based on the tapped index
           if (index == 0) {
             // Navigate to the home screen page
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const HomeScreen()));
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => HomeScreen()));
           } else if (index == 1) {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const MapScreen()));
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => MapScreen()));
           } else if (index == 2) {
             Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const HomeScreen_Biggerfontsize()));
+                context, MaterialPageRoute(builder: (context) => HomeScreen()));
           }
         },
       ),
