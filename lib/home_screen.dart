@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/api/api.dart';
+import 'package:flutter_application_1/loginpage.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'models/movie.dart';
@@ -18,6 +19,7 @@ late Future<List<Movie>> ToprateMovies;
 late Future<List<Movie>> upcomingMovies;
 
 class _HomeScreenState extends State<HomeScreen> {
+  int currentIndex = 0;
   @override
   void initState() {
     super.initState();
@@ -31,6 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
+        // backgroundColor: Colors.white,
         elevation: 0,
         title: Image.asset(
           'assets/icon.png',
@@ -48,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Trending Movies test github action',
+                'Trending Movies github',
                 style: GoogleFonts.aBeeZee(fontSize: 25),
               ),
               const SizedBox(height: 32),
@@ -124,6 +127,39 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: currentIndex,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Search',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.logout),
+            label: 'Loogout',
+          ),
+        ],
+        selectedItemColor: Colors.amber[800],
+        onTap: (int index) {
+          // Handle navigation based on the tapped index
+          if (index == 0) {
+            // Navigate to the home screen page
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => HomeScreen()));
+          } else if (index == 1) {
+            // Navigate to the search screen page
+            // Assuming you have a '/search' route defined
+            Navigator.pushReplacementNamed(context, '/change color');
+          } else if (index == 2) {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => LoginPage()));
+          }
+        },
       ),
     );
   }

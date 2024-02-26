@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/colors.dart';
 import 'package:flutter_application_1/constants.dart';
+import 'package:flutter_application_1/home_screen.dart';
 import 'package:flutter_application_1/models/movie.dart';
 import 'package:flutter_application_1/widgets/back_button.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class DetailsScreen extends StatelessWidget {
-  const DetailsScreen({super.key, required this.movie});
+  DetailsScreen({super.key, required this.movie});
+  int currentIndex = 0;
 
   final Movie movie;
 
@@ -119,6 +121,40 @@ class DetailsScreen extends StatelessWidget {
           ),
         ),
       ]),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: currentIndex,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Search',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite),
+            label: 'Favorites',
+          ),
+        ],
+        selectedItemColor: Colors.amber[800],
+        onTap: (int index) {
+          // Handle navigation based on the tapped index
+          if (index == 0) {
+            // Navigate to the home screen page
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => HomeScreen()));
+          } else if (index == 1) {
+            // Navigate to the search screen page
+            // Assuming you have a '/search' route defined
+            Navigator.pushReplacementNamed(context, '/search');
+          } else if (index == 2) {
+            // Navigate to the favorites screen page
+            // Assuming you have a '/favorites' route defined
+            Navigator.pushReplacementNamed(context, '/favorites');
+          }
+        },
+      ),
     );
   }
 }

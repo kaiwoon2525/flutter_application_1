@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/home_screen.dart';
 import 'package:flutter_application_1/signuppage.dart';
 import 'package:flutter_application_1/uihelper.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -15,6 +16,16 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
+  Future<void> storeLoggedInState(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('loggedIn', value);
+  }
+
+  Future<bool> getLoggedInState() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('loggedIn') ?? false;
+  }
+
   login(String email, String password) async {
     if (email == '' && password == '') {
       return UiHelper.customAlerBox(context, 'Enter Required Fields');
@@ -22,13 +33,10 @@ class _LoginPageState extends State<LoginPage> {
       UserCredential? usercredential;
       try {
         usercredential = await FirebaseAuth.instance
-            .signInWithEmailAndPassword(email: email, password: password)
-            .then(
-          (value) {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => HomeScreen()));
-          },
-        );
+            .signInWithEmailAndPassword(email: email, password: password);
+        await storeLoggedInState(true); // Store login state
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => HomeScreen()));
       } on FirebaseAuthException catch (ex) {
         return UiHelper.customAlerBox(context, ex.code.toString());
       }
@@ -76,4 +84,18 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   checkLoggedInState();
+  // }
+
+  // void checkLoggedInState() async {
+  //   bool isLoggedIn = await getLoggedInState();
+  //   if (isLoggedIn) {
+  //     Navigator.pushReplacement(
+  //         context, MaterialPageRoute(builder: (context) => HomeScreen()));
+  //   }
+  // }
 }
