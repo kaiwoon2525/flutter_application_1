@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/api/api.dart';
 import 'package:flutter_application_1/loginpage.dart';
+import 'package:flutter_application_1/map.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'models/movie.dart';
@@ -136,8 +137,8 @@ class _HomeScreenState extends State<HomeScreen> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Search',
+            icon: Icon(Icons.map),
+            label: 'Map',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.logout),
@@ -152,9 +153,8 @@ class _HomeScreenState extends State<HomeScreen> {
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => HomeScreen()));
           } else if (index == 1) {
-            // Navigate to the search screen page
-            // Assuming you have a '/search' route defined
-            Navigator.pushReplacementNamed(context, '/change color');
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => MapScreen()));
           } else if (index == 2) {
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => LoginPage()));

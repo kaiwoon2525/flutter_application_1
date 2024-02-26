@@ -30,14 +30,23 @@ class _LoginPageState extends State<LoginPage> {
     if (email == '' && password == '') {
       return UiHelper.customAlerBox(context, 'Enter Required Fields');
     } else {
-      UserCredential? usercredential;
       try {
-        usercredential = await FirebaseAuth.instance
+        // Initiate OAuth flow here to obtain access tokens
+        // Example: You might use FirebaseAuth for OAuth authentication
+        // Replace this with your actual OAuth authentication method
+        UserCredential userCredential = await FirebaseAuth.instance
             .signInWithEmailAndPassword(email: email, password: password);
-        await storeLoggedInState(true); // Store login state
+
+        // Store login state
+        await storeLoggedInState(true);
+
+        // Navigate to home screen upon successful login
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => HomeScreen()));
+          context,
+          MaterialPageRoute(builder: (context) => HomeScreen()),
+        );
       } on FirebaseAuthException catch (ex) {
+        // Handle authentication errors
         return UiHelper.customAlerBox(context, ex.code.toString());
       }
     }
@@ -85,17 +94,17 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   checkLoggedInState();
-  // }
+  @override
+  void initState() {
+    super.initState();
+    checkLoggedInState();
+  }
 
-  // void checkLoggedInState() async {
-  //   bool isLoggedIn = await getLoggedInState();
-  //   if (isLoggedIn) {
-  //     Navigator.pushReplacement(
-  //         context, MaterialPageRoute(builder: (context) => HomeScreen()));
-  //   }
-  // }
+  void checkLoggedInState() async {
+    bool isLoggedIn = await getLoggedInState();
+    if (isLoggedIn) {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => HomeScreen()));
+    }
+  }
 }
